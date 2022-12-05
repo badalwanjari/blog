@@ -1,4 +1,4 @@
-# College Blog
+# College Blog - Django Project
 
 Welcome to College Blog, the ultimate online resource for students to stay up to date on the latest college trends. Our goal is to provide comprehensive and accurate information about college life. From campus news to student life, we have it all.
 
@@ -11,13 +11,13 @@ Our articles are written by experts with experience in the field. We also featur
 We’re constantly updating our content to make sure we’re providing our readers with the most up-to-date information. We also offer a range of tools and resources to help you stay on top of the latest college trends.
 
 
-#Main Pages in App
+# Main Pages in App
 - Home : User can get personalized posts
 - Explore : User can see posts recently posted on site.
 - Events : User can sort posts according to events
 - Profile : User can see profile information
 
-#Feature of app
+# Feature of app
 - User can make account
 - User can follow other user
 - User can post submit its blog/post
