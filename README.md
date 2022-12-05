@@ -12,10 +12,10 @@ We’re constantly updating our content to make sure we’re providing our reade
 
 
 #Main Pages in App
--Home : User can get personalized posts
--Explore : User can see posts recently posted on site.
--Events : User can sort posts according to events
--Profile : User can see profile information
+- Home : User can get personalized posts
+- Explore : User can see posts recently posted on site.
+- Events : User can sort posts according to events
+- Profile : User can see profile information
 
 #Feature of app
 - User can make account
