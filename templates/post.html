@@ -1,0 +1,153 @@
+{% extends 'basic.html' %} 
+{% block body %} 
+{% load static %}
+<section class="py-5">
+    <div class="container" style="padding-top: 20px; padding-bottom: 20px">
+        <div
+            class="container text-center p-4 py-xl-4"
+            style="
+                background: rgba(55, 99, 244, 0.1);
+                border-radius: 25px;
+                padding-left: 24px;
+                padding-right: 24px;
+                padding-top: 24px;
+                width: 80%;
+                padding-bottom: 8px;
+            "
+        >
+            <div>
+                <a href="{% url 'profile' profile.user %}">
+                <h4
+                    style="
+                        text-align: left;
+                        padding-left: 0px;
+                        padding-right: 0px;
+                        padding-top: 0px;
+                        padding-bottom: 0px;
+                        margin-top: 0px;
+                        width: 80%;
+                        margin-inline: auto;
+                        margin-bottom: -5px;
+                    "
+                >
+                    <img
+                        class="border rounded-circle"
+                        src="{{ profile.profile_picture.url }}"
+                        style="text-align: center; width: 40px; height: 40px; object-fit: cover;"
+                    />&nbsp;
+                    {% if profile.user.first_name %}
+                    {{ profile.user.first_name }}
+                    {% else %}
+                    {{ profile.user }}
+                    {% endif %}
+                </h4>
+                </a>
+            </div>
+            <div class="m-5">
+                <h2
+                    style="
+                        padding-top: 0px;
+                        padding-bottom: 0px;
+                        text-align: justify;
+                        margin-top: 4px;
+                        margin-bottom: 0px;
+                        width: 80%;
+                        margin-inline: auto;
+                    "
+                >
+                    {{ post.title }}
+                </h2>
+                <p
+                    style="
+                        padding-top: 10px;
+                        font-size: 1.35rem;
+                        text-align: justify;
+                        margin-top: 4px;
+                        margin-bottom: 0px;
+                        width: 80%;
+                        font-weight: 500;
+                        margin-inline: auto;
+                        color:rgba(27, 27, 27, 0.7);
+                    "
+                >
+                    {{ post.description }}
+                </p>
+            </div>
+            <center style="margin: 2rem 20px">
+                <img
+                    class="img-fluid d-xxl-flex justify-content-xxl-center align-items-xxl-center"
+                    width="760"
+                    height="507"
+                    src="{{post.image.url}}"
+                    style="
+                        text-align: center;
+                        border-style: none;
+                        width: 720px;
+                        max-height: 600px;
+                        overflow: hidden;
+                        margin: 2rem 0;
+                        border-radius: 10px;
+                        object-fit: contain;
+                    "
+                />
+            </center>
+
+            <div
+                style="
+                    margin: 1rem 3rem;
+                    display: flex;
+                    justify-content: space-between;
+                "
+            >
+                <a href="{% url 'like' post.id %}">
+                    <button
+                        type="submit"
+                        align="center"
+                        class="btn btn-primary btn-sm"
+                        height="30px"
+                    >
+                        <img
+                            src="{% static 'assets/img/like.png' %}"
+                            style="height: 30px; aspect-ratio: 1"
+                        />&nbsp;<span style="color: rgb(255, 255, 255)">
+                            {{ post.likes }}
+                        </span>
+                    </button>
+                </a>
+                <div
+                    class="p-2"
+                    style="
+                        align-items: center;
+                        border-radius: 15px;
+                        padding-top: 2px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding: 1rem 3rem;
+                        background: rgb(255, 255, 255);
+                        color: rgb(0, 183, 121);
+                    "
+                >
+                    Posted on: &nbsp
+                    <span
+                        >{{ post.created_at|date }} | {{ post.created_at|time}}</span
+                    >
+                </div>
+            </div>
+            {% if post.post_event != 'other' %}
+            <div class="mt-4">
+                <h4 style="text-align: center;">This post is related to <b><a href="{% url 'events' post.post_event %}">{{ post.post_event.capitalize }}</a></b></h4>
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+
+    {% if post.user == request.user.username %}
+    <center class="my-5">
+      <a href="{% url 'editpost' post.id %}">
+        <button class="btn btn-primary">EDIT POST</button>
+      </a>
+    </center>
+    {% endif %}
+</section>
+{% endblock %}

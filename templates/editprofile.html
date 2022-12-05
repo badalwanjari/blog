@@ -1,0 +1,125 @@
+{% extends 'basic.html' %} {% block body %}
+<section class="py-2">
+    <div class="container py-2">
+        <div class="row my-3">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold py-xl-0 my-xl-0">
+                    Edit profile information<br />
+                </h2>
+                <p class="text-muted pb-xl-0 mb-xl-0">
+                    Update your data to reflect latest info
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div style="padding-top: 20px; padding-bottom: 20px">
+        <div
+            class="container text-center pt-4 py-xl-4"
+            style="
+                background: rgba(55, 99, 244, 0.1);
+                border-radius: 25px;
+                padding-left: 24px;
+                padding-right: 24px;
+                width: 60%;
+                padding-bottom: 7px;
+                margin-bottom: -6px;
+                margin-top: 0px;
+                padding-top: 24px;
+            "
+        >
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <div
+                        style="
+                            display: grid;
+                            grid-template-columns: 0.75fr 1.25fr;
+                        "
+                    >
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            "
+                        >
+                            <img
+                                src="{{ profile.profile_picture.url }}"
+                                height="200px"
+                                width="200px"
+                                style="object-fit: cover; border-radius: 50%"
+                            />
+                        </div>
+                        <div class="files color form-group mb-3">
+                            <input class="form-control" type="file" name="profile_image" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="{{profile.user.first_name}}"
+                        style="
+                        width: 100%;
+                        line-height: 1.35rem;
+                        border-radius: 10px;
+                        padding-left: 1rem;"
+
+                    />
+                </div>
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <textarea
+                        class="form-control"
+                        style="
+                            width: 100%;
+                            line-height: 1.25rem;
+                            border-radius: 10px;
+                            padding-left: 1rem;
+                        "
+                        name="biotext"
+                        placeholder="Write about yourself here"
+                    >
+{{profile.bio}}</textarea
+                    >
+                </div>
+                <center class="mb-3">
+                    <button
+                        class="btn btn-primary shadow d-block w-20"
+                        type="submit"
+                    >
+                        Update
+                    </button>
+                </center>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

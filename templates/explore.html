@@ -1,0 +1,166 @@
+{% extends 'basic.html' %} {% block body %} {% load static %}
+<section class="py-2">
+    <div class="container">
+        <div class="row mb-5 py-xl-2 my-xl-2">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold py-xl-0 my-xl-0">
+                    See what's happening around..
+                </h2>
+                <p class="text-muted pb-xl-0 mb-xl-0">
+                    The Explore page is designed to help users find content that
+                    sparks their interests and encourages them to explore new
+                    topics and accounts. As users explore the page, they can
+                    find content from people they follow, as well as from users
+                    they don't follow yet. This allows users to discover new
+                    accounts and content that they might be interested in.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% for i in posts%}
+
+<div
+    style="
+        width: 900px;
+        margin-inline: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    "
+>
+    <div
+        class="container pt-4 py-xl-4"
+        style="
+            background: rgba(55, 99, 244, 0.1);
+            border-radius: 25px;
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-top: 24px;
+            width: 60%;
+            padding-bottom: 8px;
+        "
+    >
+        <a
+            style="
+                width: 100%;
+                font-size: 1.35rem;
+                font-weight: 400;
+                cursor: pointer;
+            "
+            href="{% url 'profile' i.post.user %}"
+        >
+            <img
+                class="border rounded-circle"
+                src="{{ i.profile.profile_picture.url }}"
+                alt="image here"
+                style="
+                    text-align: center;
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                "
+            />&nbsp; 
+            {% if i.profile.user.first_name %}
+            {{ i.profile.user.first_name }}
+            {% else %}
+            {{ i.profile.user }}
+            {% endif %}
+        </a>
+
+        <a href="{% url 'post' i.post.id %}">
+            <div
+                class="d-flex justify-content-center align-items-center img-wrapper"
+                style="
+                    margin: 1.5rem -1.5rem;
+                    background: rgba(255, 255, 255, 0.5);
+                    -webkit-backdrop-filter: blur(100px);
+                    backdrop-filter: blur(5px);
+                "
+            >
+                <img
+                    class="img-fluid d-xxl-flex justify-content-xxl-center align-items-xxl-center inner-img"
+                    src="{{ i.post.image.url }}"
+                    style="
+                        text-align: center;
+                        border-radius: 10px;
+                        border-style: none;
+                        width: 520px;
+                        height: 520px;
+                        object-fit: contain;
+                        margin: 0 0;
+                    "
+                />
+            </div>
+            <h4
+                style="
+                    margin-bottom: 0px;
+                    margin-top: -10px;
+                    text-align: center;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                "
+            >
+                {{ i.post.title }}
+            </h4>
+            <p
+                style="
+                    padding-bottom: 0px;
+                    text-align: center;
+                    margin-top: 4px;
+                    margin-bottom: 0px;
+                    color: rgba(24, 24, 24, 0.6);
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                "
+            >
+                {{ i.post.description }}
+            </p>
+        </a>
+
+        <div
+            style="
+                margin-bottom: 0px;
+                margin-top: 16px;
+                display: flex;
+                justify-content: space-between;
+            "
+        >
+            <a href="{% url 'like' i.post.id %}">
+                <button
+                    type="submit"
+                    align="center"
+                    class="btn btn-primary btn-sm"
+                    height="30px"
+                >
+                    <img
+                        src="{% static 'assets/img/like.png' %}"
+                        style="height: 30px; aspect-ratio: 1"
+                    />&nbsp;<span style="color: rgb(255, 255, 255)">
+                        {{ i.post.likes }}
+                    </span>
+                </button>
+            </a>
+            <div
+                class="p-2"
+                style="
+                    align-items: center;
+                    border-radius: 15px;
+                    padding-top: 2px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    background: rgb(255, 255, 255);
+                    color: rgb(0, 183, 121);
+                "
+            >
+                Posted on: &nbsp
+                <span>{{ i.post.created_at|date }} </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %} 
+{% endblock %}

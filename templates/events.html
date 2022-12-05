@@ -1,0 +1,243 @@
+{% extends 'basic.html' %} 
+{% block body %} 
+{% load static %}
+
+<section class="py-5">
+    <div class="container py-5 my-xl-0 py-xl-2">
+        <div class="row mb-5 py-xl-2 my-xl-2">
+            {% if event.name == 'All' %}
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold py-xl-0 my-xl-0">
+                    Search through events<br />
+                </h2>
+                <p class="text-muted pb-xl-0 mb-xl-0">
+                    It has become a platform for people to share information and
+                    stay up-to-date on events happening around them.
+                </p>
+            </div>
+            {% else %}
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold py-xl-0 my-xl-0">
+                    {{ event.name }}<br />
+                </h2>
+                <p class="text-muted pb-xl-0 mb-xl-0">
+                    {{ event.intro }}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div align="center" class="container">
+        <div class="dropdown">
+            <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                Select Event
+            </button>
+            <div
+                class="dropdown-menu"
+                style="width: 18%"
+                aria-labelledby="dropdownMenuButton"
+            >
+                <a class="dropdown-item" href="{% url 'events' 'all' %}">All</a>
+                <a class="dropdown-item" href="{% url 'events' 'yash' %}"
+                    >Yash</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'compufest' %}"
+                    >Compufest</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'itechroots' %}"
+                    >iTechRoots</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'upsurge' %}"
+                    >Upsurge</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'icon' %}"
+                    >Icon</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'electrica' %}"
+                    >Electrica</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'antheen' %}"
+                    >Antheen</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'mechfiesta' %}"
+                    >Mechfiesta</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'sparsh' %}"
+                    >Sparsh</a
+                >
+                <a class="dropdown-item" href="{% url 'events' 'other' %}"
+                    >Other</a
+                >
+            </div>
+        </div>
+    </div>
+</section>
+<div style="padding-top: 20px; padding-bottom: 20px">
+    {% if posts|length == 0 %}
+    <center style="min-height: 20vh;">
+        <h3>No posts yet. Try to create one.</h3>
+    </center>
+    
+    {% endif %}
+    {% for i in posts%}
+    <div
+        style="
+            width: 900px;
+            margin-inline: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        "
+    >
+        <div
+            class="container pt-4 py-xl-4"
+            style="
+                background: rgba(55, 99, 244, 0.1);
+                border-radius: 25px;
+                padding-left: 24px;
+                padding-right: 24px;
+                padding-top: 24px;
+                width: 60%;
+                padding-bottom: 8px;
+            "
+        >
+            <a
+                style="
+                    width: 100%;
+                    font-size: 1.35rem;
+                    font-weight: 400;
+                    cursor: pointer;
+                "
+                href="{% url 'profile' i.post.user %}"
+            >
+                <img
+                    class="border rounded-circle"
+                    src="{{ i.profile.profile_picture.url }}"
+                    alt="image here"
+                    style="
+                        text-align: center;
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    "
+                />&nbsp; 
+                {% if i.profile.user.first_name %}
+                {{ i.profile.user.first_name }}
+                {% else %}
+                {{ i.profile.user }}
+                {% endif %}
+            </a>
+    
+            <a href="{% url 'post' i.post.id %}">
+                <div
+                    class="d-flex justify-content-center align-items-center img-wrapper"
+                    style="
+                        margin: 1.5rem -1.5rem;
+                        background: rgba(255, 255, 255, 0.5);
+                        -webkit-backdrop-filter: blur(100px);
+                        backdrop-filter: blur(5px);
+                    "
+                >
+                    <img
+                        class="img-fluid d-xxl-flex justify-content-xxl-center align-items-xxl-center inner-img"
+                        src="{{ i.post.image.url }}"
+                        style="
+                            text-align: center;
+                            border-radius: 10px;
+                            border-style: none;
+                            width: 520px;
+                            height: 520px;
+                            object-fit: contain;
+                            margin: 0 0;
+                        "
+                    />
+                </div>
+                <h4
+                    style="
+                        margin-bottom: 0px;
+                        margin-top: -10px;
+                        text-align: center;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    "
+                >
+                    {{ i.post.title }}
+                </h4>
+                <p
+                    style="
+                        padding-bottom: 0px;
+                        text-align: center;
+                        margin-top: 4px;
+                        margin-bottom: 0px;
+                        color: rgba(24, 24, 24, 0.6);
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    "
+                >
+                    {{ i.post.description }}
+                </p>
+            </a>
+    
+            <div
+                style="
+                    margin-bottom: 0px;
+                    margin-top: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                "
+            >
+                <a href="{% url 'like' i.post.id %}">
+                    <button
+                        type="submit"
+                        align="center"
+                        class="btn btn-primary btn-sm"
+                        height="30px"
+                    >
+                        <img
+                            src="{% static 'assets/img/like.png' %}"
+                            style="height: 30px; aspect-ratio: 1"
+                        />&nbsp;<span style="color: rgb(255, 255, 255)">
+                            {{ i.post.likes }}
+                        </span>
+                    </button>
+                </a>
+                <div
+                    class="p-2"
+                    style="
+                        align-items: center;
+                        border-radius: 15px;
+                        padding-top: 2px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        background: rgb(255, 255, 255);
+                        color: rgb(0, 183, 121);
+                    "
+                >
+                    Posted on: &nbsp
+                    <span>{{ i.post.created_at|date }} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} 
+</div>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    defer
+></script>
+<script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"
+    defer
+></script>
+{% endblock %}

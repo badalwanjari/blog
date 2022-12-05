@@ -1,0 +1,140 @@
+{% extends 'basic.html' %} {% block body %}
+<section class="pt-3">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Create a blog post<br /></h2>
+                <p class="text-muted">
+                    Curae hendrerit donec commodo hendrerit egestas tempus,
+                    turpis facilisis nostra nunc. Vestibulum dui eget ultrices.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-5">
+    <div style="padding-top: 20px; padding-bottom: 20px">
+        <div
+            class="container text-center pt-4 py-xl-4"
+            style="
+                background: rgba(55, 99, 244, 0.1);
+                border-radius: 25px;
+                padding-left: 24px;
+                padding-right: 24px;
+                width: 60%;
+                padding-bottom: 7px;
+                margin-bottom: -6px;
+                margin-top: 0px;
+                padding-top: 24px;
+            "
+        >
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <div class="files color form-group">
+                        <input
+                            type="file"
+                            name="post_image"
+                            value=""
+                            required
+                        />
+                    </div>
+                </div>
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <input
+                        class="form-control"
+                        type="text"
+                        style="
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            width: 100%;
+                            line-height: 3rem;
+                            border-radius: 10px;
+                            padding-left: 1rem;
+                        "
+                        name="title"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <textarea
+                        class="form-control"
+                        name="description"
+                        style="
+                            width: 100%;
+                            line-height: 3rem;
+                            border-radius: 10px;
+                            padding-left: 1rem;
+                        "
+                        placeholder="Caption/Description/Blog write-up"
+                        required
+                    ></textarea>
+                </div>
+
+                <div
+                    class="mx-4"
+                    style="
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    "
+                >
+                    <select
+                        class="form-select form-select-md mb-3"
+                        aria-label=".form-select-lg example"
+                        name="event"
+                        required
+                    >
+                        <option selected disabled>Select Event</option>
+                        <option value="yash">Yash</option>
+                        <option value="compufest">Compufest</option>
+                        <option value="itechroots">iTechRoots</option>
+                        <option value="upsurge">Upsurge</option>
+                        <option value="icon">Icon</option>
+                        <option value="electrica">Electrica</option>
+                        <option value="antaheen">Antaheen</option>
+                        <option value="mechfiesta">Mechfiesta</option>
+                        <option value="sparsh">Sparsh</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <center class="my-4">
+                    <button
+                        class="btn btn-primary shadow d-block w-60"
+                        type="submit"
+                    >
+                        POST
+                    </button>
+                </center>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
