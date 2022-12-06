@@ -38,6 +38,9 @@
             body::-webkit-scrollbar {
                 width: 5px;
             }
+            td{
+                width: 30%;
+            }
             body::-webkit-scrollbar-thumb {
                 background: rgb(74, 74, 255);
                 border-radius: 15px;
@@ -60,6 +63,18 @@
             }
             footer{
                 align-self: baseline;
+            }
+            .gridview{
+                width: min(800px, 96%);
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            @media only screen and (min-width: 600px) {
+                .gridview{
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 0.5rem;
+                }
             }
         </style>
     </head>
