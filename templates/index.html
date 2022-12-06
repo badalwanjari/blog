@@ -1,4 +1,6 @@
-{% extends 'basic.html' %} {% block body %} {% load static %}
+{% extends 'basic.html' %} 
+{% block body %} 
+{% load static %}
 <section class="py-2">
     <div class="container py-5 my-xl-0 py-xl-2">
         <div class="row mb-5 py-xl-2 my-xl-2">
@@ -11,6 +13,12 @@
         </div>
     </div>
 </section>
+<div>
+{% if posts|length == 0 %}
+    <center style="min-height: 20vh;">
+        <h3>No posts yet. Follow people. Explore. Create.</h3>
+    </center>
+{% endif %}
 {% for i in posts%}
 
 <div
@@ -154,5 +162,6 @@
         </div>
     </div>
 </div>
-{% endfor %} 
+{% endfor %}
+</div> 
 {% endblock %}

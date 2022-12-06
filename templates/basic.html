@@ -30,8 +30,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css"
         />
         <style>
-            body {
-                min-height: 75vh;
+            #main {
+                min-height: 500px;
             }
             body::-webkit-scrollbar {
                 width: 5px;
@@ -55,6 +55,9 @@
             .img-wrapper {
                 display: inline-block;
                 box-sizing: border-box;
+            }
+            footer{
+                align-self: baseline;
             }
         </style>
     </head>
@@ -143,7 +146,11 @@
                 </div>
             </div>
         </nav>
-        {% block body %} {% endblock %}
+        <div id="main">
+            {% block body %}
+            
+            {% endblock %}
+        </div>
         <footer class="bg-primary-gradient" style="background: #ffffff">
             <div
                 class="container py-4"

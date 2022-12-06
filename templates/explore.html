@@ -19,6 +19,11 @@
     </div>
 </section>
 
+{% if posts|length == 0 %}
+    <center style="min-height: 20vh;">
+        <h3>No posts yet. Try to create one.</h3>
+    </center>
+{% endif %}
 {% for i in posts%}
 
 <div

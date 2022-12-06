@@ -243,3 +243,25 @@ def deletepost(request, pk):
         return HttpResponse("<h1>You are not allowed to do this!!!</h1>")
     post.delete()
     return redirect('/profile/' + post.user)
+
+def forgetpassword(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        npass = request.POST['npass']
+        npass1 = request.POST['npass1']
+        error = False
+        try:
+            user = User.objects.get(username=username, email=email)
+            if npass != npass1:
+                messages.info(request, "Confirm password not matched!")
+                error = True
+            if error:
+                return redirect('forgetpassword')
+            user.set_password(npass)
+            user.save()
+            return redirect('login')
+        except:
+            messages.info(request, "User Not Found : )")
+            return redirect('forgetpassword')
+    return render(request, 'auth/forgetpassword.html')
