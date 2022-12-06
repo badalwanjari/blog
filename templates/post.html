@@ -8,10 +8,8 @@
             style="
                 background: rgba(55, 99, 244, 0.1);
                 border-radius: 25px;
-                padding-left: 24px;
-                padding-right: 24px;
-                padding-top: 24px;
-                width: 80%;
+                padding: 1rem 0;
+                width: min(100%, 800px);
                 padding-bottom: 8px;
             "
         >
@@ -25,7 +23,7 @@
                         padding-top: 0px;
                         padding-bottom: 0px;
                         margin-top: 0px;
-                        width: 80%;
+                        width: 96%;
                         margin-inline: auto;
                         margin-bottom: -5px;
                     "
@@ -43,15 +41,15 @@
                 </h4>
                 </a>
             </div>
-            <div class="m-5">
+            <div class="my-4 w-100 view">
                 <h2
                     style="
                         padding-top: 0px;
                         padding-bottom: 0px;
-                        text-align: justify;
+                        text-align: left;
                         margin-top: 4px;
                         margin-bottom: 0px;
-                        width: 80%;
+                        width: 100%;
                         margin-inline: auto;
                     "
                 >
@@ -60,12 +58,12 @@
                 <p
                     style="
                         padding-top: 10px;
-                        font-size: 1.35rem;
-                        text-align: justify;
+                        font-size: 1.25rem;
+                        text-align: left;
                         margin-top: 4px;
                         margin-bottom: 0px;
-                        width: 80%;
-                        font-weight: 500;
+                        width: 100%;
+                        font-weight: 400;
                         margin-inline: auto;
                         color:rgba(27, 27, 27, 0.7);
                     "
@@ -73,16 +71,15 @@
                     {{ post.description }}
                 </p>
             </div>
-            <center style="margin: 2rem 20px">
+            <center style="margin: 2rem 10px">
                 <img
                     class="img-fluid d-xxl-flex justify-content-xxl-center align-items-xxl-center"
-                    width="760"
                     height="507"
                     src="{{post.image.url}}"
                     style="
                         text-align: center;
                         border-style: none;
-                        width: 720px;
+                        width: min(720px, 100%);
                         max-height: 600px;
                         overflow: hidden;
                         margin: 2rem 0;
@@ -94,7 +91,8 @@
 
             <div
                 style="
-                    margin: 1rem 3rem;
+                    width: 100%;
+                    margin: 1rem 0;
                     display: flex;
                     justify-content: space-between;
                 "
@@ -115,14 +113,13 @@
                     </button>
                 </a>
                 <div
-                    class="p-2"
                     style="
-                        align-items: center;
+                        max-width: 60%;
                         border-radius: 15px;
                         padding-top: 2px;
                         font-size: 14px;
                         font-weight: 600;
-                        padding: 1rem 3rem;
+                        padding: 1rem 1rem;
                         background: rgb(255, 255, 255);
                         color: rgb(0, 183, 121);
                     "

@@ -21,7 +21,7 @@
                 border-radius: 25px;
                 padding-left: 24px;
                 padding-right: 24px;
-                width: 60%;
+                width: min(96%, 700px);
                 padding-bottom: 7px;
                 margin-bottom: -6px;
                 margin-top: 0px;
@@ -44,6 +44,7 @@
                             type="file"
                             name="post_image"
                             value=""
+                            accept="image/*"
                             required
                         />
                     </div>
@@ -64,9 +65,10 @@
                             margin-top: 10px;
                             margin-bottom: 10px;
                             width: 100%;
-                            line-height: 3rem;
+                            line-height: 1.35rem;
                             border-radius: 10px;
                             padding-left: 1rem;
+                            height: 3rem;
                         "
                         name="title"
                         placeholder="Title"
@@ -87,9 +89,10 @@
                         name="description"
                         style="
                             width: 100%;
-                            line-height: 3rem;
+                            line-height: 1.35rem;
                             border-radius: 10px;
                             padding-left: 1rem;
+                            min-height: 12rem;
                         "
                         placeholder="Caption/Description/Blog write-up"
                         required
@@ -106,7 +109,7 @@
                     "
                 >
                     <select
-                        class="form-select form-select-md mb-3"
+                        class="form-select form-select-md"
                         aria-label=".form-select-lg example"
                         name="event"
                         required

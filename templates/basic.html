@@ -70,10 +70,18 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
             }
+            .view{
+                padding: 0 0;
+                font-size: 1.0rem;
+            }
             @media only screen and (min-width: 600px) {
                 .gridview{
                     grid-template-columns: 1fr 1fr 1fr;
                     gap: 0.5rem;
+                }
+                .view{
+                    padding: 2rem 2rem;
+                    font-size: 1.25rem;
                 }
             }
         </style>
@@ -138,8 +146,7 @@
                         style="
                             padding-left: 18px;
                             padding-right: 18px;
-                            margin-left: 20px;
-                            margin-right: 20px;
+                            margin: 0 1rem;
                         "
                         >Create Post</a
                     >
