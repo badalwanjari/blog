@@ -52,7 +52,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/')
         else :
-            messages.info(request, "Crediecials are not valid!")
+            messages.info(request, "User not found!")
             return redirect('login')
     return render(request, 'auth/login.html')
 
