@@ -1,6 +1,6 @@
 {% extends 'basic.html' %} {% block body %}
 <section class="p-3">
-    <div class="container pe-xl-0 ps-xl-0" style="width: 1400px">
+    <div class="container pe-xl-0 ps-xl-0" style="width: 100%">
         <h1
             class="fw-bold text-center ps-0 pb-0 mb-0 ps-md-0 pe-lg-0 mb-3"
             style="font-size: 40px; text-align: left;"
@@ -9,7 +9,7 @@
                 class="rounded-circle"
                 src="{{ profile.profile_picture.url }}"
                 style="
-                    width: 16%;
+                    width: max(16%, 140px);
                     aspect-ratio: 1;
                     padding: 10px;
                     object-fit: cover;
@@ -93,7 +93,7 @@
             <br />
         </h1>
     </div>
-    <div class="container text-center" style="width: 60%; font-size: 110%">
+    <div class="container text-center col-md-12" style="width: 60%; font-size: 110%">
         <div class="row" style="font-size: 110%">
             <div class="col-md-4" style="font-size: 110%">
                 <h3 style="text-align: center; font-size: 110%">
@@ -110,6 +110,7 @@
                 <h3 style="text-align: center; font-size: 110%">Following</h3>
             </div>
         </div>
+        
     </div>
     <h1
         class="fw-bold text-center ps-0 pb-0 mb-0 ps-md-0 pe-lg-0"
