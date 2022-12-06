@@ -1,33 +1,27 @@
 {% extends 'basic.html' %} 
 {% block body %}
 <section class="py-5">
-    <div class="container py-5 my-xl-0 py-xl-2">
-        <div class="row mb-5 py-xl-2 my-xl-2">
+    <div class="container">
+        <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
                 <h2 class="fw-bold py-xl-0 my-xl-0">
                     Edit post information<br />
                 </h2>
-                <p class="text-muted pb-xl-0 mb-xl-0">
+                <p class="text-muted">
                     Edit post data and provide us more accurate information
                 </p>
             </div>
         </div>
     </div>
 </section>
-<section class="py-5">
-    <div style="padding-top: 20px; padding-bottom: 20px">
+<center>
         <div
             class="container text-center pt-4 py-xl-4"
             style="
+                width: min(720px, 100%);
                 background: rgba(55, 99, 244, 0.1);
                 border-radius: 25px;
-                padding-left: 24px;
-                padding-right: 24px;
-                width: 60%;
-                padding-bottom: 7px;
-                margin-bottom: -6px;
-                margin-top: 0px;
-                padding-top: 24px;
+                padding: 1rem 0.5rem;
             "
         >
             <form method="POST" action="" enctype="multipart/form-data">
@@ -41,7 +35,7 @@
                         padding-bottom: 10px;
                     "
                 >
-                    <div style="display: grid; grid-template-columns: 1fr 1fr">
+                    <div class="editpostimage" style="display: grid;">
                         <div
                             style="
                                 display: flex;
@@ -85,15 +79,14 @@
                         class="form-control"
                         style="
                             width: 100%;
-                            line-height: 1.35em;
+                            line-height: 1.25em;
                             border-radius: 10px;
+                            min-height: 5rem;
                             padding-left: 1rem;
                         "
                         name="title"
                         placeholder="Title"
-                    >
-{{post.title}}</textarea
-                    >
+                    >{{post.title}}</textarea>
                     <p
                         style="
                             text-align: left;
@@ -108,6 +101,7 @@
                         class="form-control"
                         style="
                             width: 100%;
+                            min-height: 10rem;
                             line-height: 1.25em;
                             border-radius: 10px;
                             padding-left: 1rem;
@@ -161,7 +155,5 @@
                 </div>
             </form>
         </div>
-    </div>
-</section>
-
+</center>
 {% endblock %}

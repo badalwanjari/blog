@@ -13,103 +13,105 @@
         </div>
     </div>
 </section>
-<section>
-    <div style="padding-top: 20px; padding-bottom: 20px">
-        <div
-            class="container text-center pt-4 py-xl-4"
-            style="
-                background: rgba(55, 99, 244, 0.1);
-                border-radius: 25px;
-                padding-left: 24px;
-                padding-right: 24px;
-                width: 60%;
-                padding-bottom: 7px;
-                margin-bottom: -6px;
-                margin-top: 0px;
-                padding-top: 24px;
-            "
-        >
-            <form method="POST" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div
-                    class="mx-4"
-                    style="
-                        margin-top: 0px;
-                        margin-bottom: 0px;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                    "
-                >
+
+<center>
+    <div
+        class="container text-center pt-4 py-xl-4"
+        style="
+            width: min(720px, 100%);
+            background: rgba(55, 99, 244, 0.1);
+            border-radius: 25px;
+            padding: 1rem 0.5rem;
+        "
+    >
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div
+                class="mx-4"
+                style="
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                "
+            >
+                <div class="editpostimage" style="display: grid;">
                     <div
                         style="
-                            display: grid;
-                            grid-template-columns: 0.75fr 1.25fr;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                         "
                     >
-                        <div
+                        <img
+                            src="{{ profile.profile_picture.url }}"
                             style="
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
+                                object-fit: contain;
+                                max-height: 200px;
+                                max-width: 200px;
+                                border-radius: 50%;
                             "
-                        >
-                            <img
-                                src="{{ profile.profile_picture.url }}"
-                                height="200px"
-                                width="200px"
-                                style="object-fit: cover; border-radius: 50%"
-                            />
-                        </div>
-                        <div class="files color form-group mb-3">
-                            <input class="form-control" type="file" name="profile_image" value="" accept="image/*" />
-                        </div>
+                        />
+                    </div>
+                    <div class="files color form-group mb-3">
+                        <input class="form-control" type="file" name="profile_image" value="" accept="image/*" />
                     </div>
                 </div>
-                <div
-                    class="mx-4"
+            </div>
+            <div
+                class="mx-4"
+                style="
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                "
+            >
+                <p
                     style="
-                        margin-top: 0px;
+                        text-align: left;
                         margin-bottom: 0px;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
+                        margin-left: 5px;
                     "
                 >
-                    <input
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        value="{{profile.user.first_name}}"
-                        style="
+                    Name
+                </p>
+                <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    value="{{profile.user.first_name}}"
+                    style="
+                    width: 100%;
+                    line-height: 1.35rem;
+                    border-radius: 10px;
+                    padding-left: 1rem;"
+                />
+                <p
+                    style="
+                        text-align: left;
+                        margin-top: 20px;
+                        margin-bottom: 0;
+                        margin-left: 5px;
+                    "
+                >
+                    Description
+                </p>
+                <textarea
+                    class="form-control"
+                    style="
                         width: 100%;
-                        line-height: 1.35rem;
+                        min-height: 10rem;
+                        line-height: 1.25em;
                         border-radius: 10px;
-                        padding-left: 1rem;"
-
-                    />
-                </div>
-                <div
-                    class="mx-4"
-                    style="
-                        margin-top: 0px;
-                        margin-bottom: 0px;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
+                        padding-left: 1rem;
                     "
-                >
-                    <textarea
-                        class="form-control"
-                        style="
-                            width: 100%;
-                            line-height: 1.25rem;
-                            border-radius: 10px;
-                            padding-left: 1rem;
-                        "
-                        name="biotext"
-                        placeholder="Write about yourself here"
-                    >
-{{profile.bio}}</textarea
-                    >
-                </div>
+                    name="biotext"
+                    placeholder="Write about yourself here"
+                >{{profile.bio}}</textarea>
+            </div>
+            
+            <div class="m-4 d-flex justify-content-evenly">
                 <center class="mb-3">
                     <button
                         class="btn btn-primary shadow d-block w-20"
@@ -118,8 +120,8 @@
                         Update
                     </button>
                 </center>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-</section>
+</center>
 {% endblock %}

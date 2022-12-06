@@ -35,14 +35,14 @@
             #main {
                 min-height: 500px;
             }
-            body::-webkit-scrollbar {
+            body::-webkit-scrollbar, textarea::-webkit-scrollbar {
                 width: 5px;
             }
             td{
                 width: 30%;
             }
-            body::-webkit-scrollbar-thumb {
-                background: rgb(74, 74, 255);
+            body::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
+                background: rgb(160, 160, 255);
                 border-radius: 15px;
             }
             .img-wrapper {  
@@ -74,6 +74,10 @@
                 padding: 0 0;
                 font-size: 1.0rem;
             }
+            .editpostimage{
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
             @media only screen and (min-width: 600px) {
                 .gridview{
                     grid-template-columns: 1fr 1fr 1fr;
@@ -82,6 +86,10 @@
                 .view{
                     padding: 2rem 2rem;
                     font-size: 1.25rem;
+                }
+                .editpostimage{
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
                 }
             }
         </style>

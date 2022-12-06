@@ -16,7 +16,7 @@
 <center>
 {% if posts|length == 0 %}
     <center style="min-height: 20vh;">
-        <h3>No posts yet. Follow people. Explore. Create.</h3>
+        <h3>No posts yet. Follow people. <a href="{% url 'explore' %}">Explore</a>. <a href="{% url 'createpost' %}">Create.</a></h3>
     </center>
 {% endif %}
 
