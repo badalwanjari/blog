@@ -125,9 +125,9 @@
                         class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example"
                         name="event"
-                        value="{{post.post_event}}"
+                      required
                     >
-                        <option selected disabled>Select Event</option>
+                        <option selected value="{{ post.post_event }}">{{ post.post_event.capitalize }}</option>
                         <option value="yash">Yash</option>
                         <option value="compufest">Compufest</option>
                         <option value="itechroots">iTechRoots</option>
