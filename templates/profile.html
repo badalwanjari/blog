@@ -1,10 +1,10 @@
 {% extends 'basic.html' %} 
 {% block body %}
 <section class="p-3">
-    <div align="center" class="container pt-4" style="width: min(720px, 100%);">
+    <div align="center" class="container pt-4" style="width: min(720px, 100%)">
         <h1
             class="fw-bold text-center ps-0 pb-0 mb-0 ps-md-0 pe-lg-0 mb-3"
-            style="font-size: 40px; text-align: left;"
+            style="font-size: 40px; text-align: left"
         >
             <img
                 class="rounded-circle"
@@ -14,7 +14,7 @@
                     aspect-ratio: 1;
                     padding: 10px;
                     object-fit: cover;
-                    border:2px solid rgb(0, 183, 121);
+                    border: 2px solid rgb(0, 183, 121);
                 "
             /><br />
         </h1>
@@ -22,19 +22,23 @@
             class="fw-bold text-center ps-0 pb-0 mb-0 ps-md-0 pe-lg-0"
             style="font-size: 30px; text-align: left"
         >
-            <span style="color: rgb(0, 183, 121)"
-                >
-                {% if profile.user.first_name %}
-                {{ profile.user.first_name }}
-                {% else %}
-                {{ profile.user }}
-                {% endif %}
-                </span
+            <span style="color: rgb(0, 183, 121)">
+                {% if profile.user.first_name %} {{ profile.user.first_name }}
+                {% else %} {{ profile.user }} {% endif %} </span
             ><br />
         </h1>
         <p
             class="fw-bold text-center"
-            style="width:min(100%, 600px);margin:auto auto;font-size: 18px; max-width: 90%; text-align: left;max-height: 8rem;overflow-y: hidden;word-wrap: normal;"
+            style="
+                width: min(100%, 600px);
+                margin: auto auto;
+                font-size: 18px;
+                max-width: 90%;
+                text-align: left;
+                max-height: 8rem;
+                overflow-y: hidden;
+                word-wrap: normal;
+            "
         >
             <span class="text-muted" style="color: rgb(153, 249, 217)"
                 >{{ profile.bio }}</span
@@ -61,12 +65,12 @@
                 </button></a
             >
             {% else %}
-            <form action="/follow" method="POST">
+            <form id="follow-form" action="/follow" method="POST">
                 {% csrf_token %}
-                <input name="username" value={{profile.user}} hidden/>
+                <input name="username" value="{{ profile.user }}" hidden />
                 <button
-                    class="btn btn-primary fs-6 fw-light text-center border-0 align-items-center align-content-center align-self-center m-auto pt-xl-1 pb-xl-1 pe-xl-2 ps-xl-2 pt-1 mt-0 pb-0 mb-0 me-0 pe-md-1 pb-md-0 mb-md-0"
-                    type="submit"
+                    class="btn btn-primary fs-6 fw-light text-center border-0 align-items-center align-content-center align-self-center m-auto pt-xl-1 pb-xl-1 pe-xl-2 ps-xl-2 pt-1 mt-0 pb-0 mb-0 me-0 pe-md-1 pb-md-0 mb-md-0 follow-btn"
+                    type="button"
                     style="
                         height: 40px;
                         width: 120px;
@@ -76,11 +80,7 @@
                         font-weight: 800;
                     "
                 >
-                    {% if follow_rel %}
-                        Followed
-                    {% else %}
-                        Follow
-                    {% endif %}
+                    {% if follow_rel %} Following {% else %} Follow {% endif %}
                 </button>
                 <br />
             </form>
@@ -93,12 +93,12 @@
         >
             <br />
         </h1>
-        <div style="text-align:center; font-size:1.25rem; font-weight: 500;">
-            <table style="width: 100%;">
+        <div style="text-align: center; font-size: 1.25rem; font-weight: 500">
+            <table style="width: 100%">
                 <tr>
                     <td>{{ posts|length }}</td>
-                    <td>{{follower}}</td>
-                    <td>{{following}}</td>
+                    <td id="follower-count">{{ follower }}</td>
+                    <td>{{ following }}</td>
                 </tr>
                 <tr>
                     <td>Posts</td>
@@ -109,7 +109,6 @@
         </div>
     </div>
 
-    
     <h1
         class="fw-bold text-center ps-0 pb-0 mb-0 ps-md-0 pe-lg-0"
         style="font-size: 20px; text-align: left"
@@ -117,9 +116,7 @@
         <br />
     </h1>
 
-    <div
-        class="container py-4 px-xl-5 my-xl-0 py-xl-0 gridview"
-    >
+    <div class="container py-4 px-xl-5 my-xl-0 py-xl-0 gridview">
         {% for post in posts %}
         <div
             class="d-flex justify-content-center align-items-center"
@@ -129,20 +126,50 @@
                     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
             "
         >
-        <a class="img-wrapper" href="{% url 'post' post.id %}">
-            <img
-                class="img-fluid inner-img"
-                src="{{post.image.url}}"
-                style="
-                    width: 100%;
-                    aspect-ratio: 1;
-                    object-fit: cover;
-                    gap: 1rem;
-                "
-            />
-        </a>
+            <a class="img-wrapper" href="{% url 'post' post.id %}">
+                <img
+                    class="img-fluid inner-img"
+                    src="{{post.image.url}}"
+                    style="
+                        width: 100%;
+                        aspect-ratio: 1;
+                        object-fit: cover;
+                        gap: 1rem;
+                    "
+                />
+            </a>
         </div>
         {% endfor %}
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const followButton = document.querySelector(".follow-btn");
+        const followForm = document.querySelector("#follow-form");
+        const followerCountElement = document.querySelector("#follower-count");
+
+        followButton.addEventListener("click", () => {
+            const formData = new FormData(followForm);
+            const url = "/follow/";
+
+            // Send AJAX request
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Update follower count and button text based on follow status
+                    followerCountElement.textContent = data.follower_count;
+                    followButton.textContent = data.is_following
+                        ? "Following"
+                        : "Follow";
+                })
+                .catch((error) => console.error("Error:", error));
+        });
+    });
+</script>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -215,14 +215,18 @@ def like(request, pk):
             del_like.delete()
             post.likes = post.likes - 1
             post.save()
+            is_liked = False
         else:
             create_like = Like(post_id=pk, username=request.user.username)
             create_like.save()
             post.likes = post.likes + 1
             post.save()
-        return redirect('/')
-    except:
-        return redirect('home')
+            is_liked = True
+
+        return JsonResponse({'likes': post.likes, 'is_liked': is_liked})
+    except Exception as e:
+        print(e)  # Handle the exception accordingly
+        return JsonResponse({'error': 'An error occurred.'}, status=500)
 
 @login_required(login_url='login')
 def editpost(request, pk):
