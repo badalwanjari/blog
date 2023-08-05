@@ -190,11 +190,20 @@ def follow(request):
         if Follow.objects.filter(following=following, follower=follower).first():
             delele_follow = Follow.objects.filter(following=following, follower=follower).first()
             delele_follow.delete()
-            return redirect('/profile/' + following)
+            is_following = False
         else:
             create_follow = Follow(following=following, follower=follower)
             create_follow.save()
-            return redirect('/profile/' + following)
+            is_following = True
+
+        follower_count = Follow.objects.filter(following=following).count()
+
+        data = {
+            'is_following': is_following,
+            'follower_count': follower_count
+        }
+        return JsonResponse(data)
+
     return HttpResponse("Followed Successfully!!!")
 
 @login_required(login_url='login')
