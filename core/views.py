@@ -4,7 +4,54 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post, Follow, Like
-# Create your views here.
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+
+
+def resize_image(image, size=(500, 500)):
+    try:
+        img = Image.open(image)
+    except:
+        return None
+
+    # Get the aspect ratio
+    img_ratio = img.width / img.height
+    target_ratio = size[0] / size[1]
+
+    if img_ratio > target_ratio:
+        new_height = size[1]
+        new_width = int(new_height * img_ratio)
+    else:
+        new_width = size[0]
+        new_height = int(new_width / img_ratio)
+
+    img = img.resize((new_width, new_height), Image.ANTIALIAS)
+
+    left = (new_width - size[0]) / 2
+    top = (new_height - size[1]) / 2
+    right = (new_width + size[0]) / 2
+    bottom = (new_height + size[1]) / 2
+    img = img.crop((left, top, right, bottom))
+
+    img_io = BytesIO()
+    img.save(img_io, format='JPEG')
+    img_io.seek(0)
+
+    resized_image = InMemoryUploadedFile(
+        img_io, 
+        None, 
+        image.name, 
+        'image/jpeg', 
+        sys.getsizeof(img_io), 
+        None
+    )
+    return resized_image
+
+
+
+
 
 def getHeader(event):
     if event == 'all':
@@ -31,6 +78,8 @@ def getHeader(event):
         return {'name': 'Personal Posts', 'intro': 'These are personal posts on site. Look around. Explore.'}
     return {}
         
+
+
 @login_required(login_url='login')
 def home(request):
     post_base = Post.objects.all()
@@ -140,22 +189,30 @@ def profile(request, pk):
 @login_required(login_url='login')
 def createpost(request):
     if request.method == 'POST':
-        if request.FILES.get('post_image') == None:
-            profile_image = request.FILES.get('post_image')
-            title = request.POST.get('title')
-            description = request.POST.get('description')
-            post_event = request.POST.get('event')
-            post = Post(user=request.user, title=title, description=description, post_event=post_event)
-            post.save()
+        profile_image = request.FILES.get('post_image')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        post_event = request.POST.get('event')
+
+        if profile_image:
+            # Resize the image before saving it
+            profile_image = resize_image(profile_image)
         else:
-            profile_image = request.FILES.get('post_image')
-            title = request.POST.get('title')
-            description = request.POST.get('description')
-            post_event = request.POST.get('event')
-            post = Post(user=request.user, image=profile_image, title=title, description=description, post_event=post_event)
-            post.save()
-        return redirect('/profile/' + request.user.username )
+            profile_image = 'default.jpg'
+
+        post = Post(
+            user=request.user,
+            image=profile_image,  # If no image, this will be None
+            title=title,
+            description=description,
+            post_event=post_event
+        )
+        post.save()
+        
+        return redirect('/profile/' + request.user.username)
+    
     return render(request, 'blog/create-post.html')
+
 
 @login_required(login_url='login')
 def editprofile(request):
@@ -171,10 +228,9 @@ def editprofile(request):
             profile.user.save()
             profile.save()
         else:
-            image = request.FILES.get('profile_image')
             bio = request.POST.get('biotext')
             name = request.POST.get('name')
-            profile.profile_picture = image
+            profile.profile_picture =  resize_image(request.FILES.get('profile_image'), size=(100, 100))
             profile.bio = bio
             profile.user.first_name = name
             profile.user.save()
@@ -240,7 +296,7 @@ def editpost(request, pk):
         else:
             post.title = request.POST['title']
             post.description = request.POST['description']
-            post.image = request.FILES['post_image']
+            post.image = resize_image(request.FILES['post_image'])
             post.post_event = request.POST['event']
             post.save()
         return redirect('/profile/'+post.user)
